@@ -1,19 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using MetricServer.Web.Models;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using System.Linq;
 
 namespace MetricServer.Web.Controllers
 {
     public class BadgeController : Controller
     {
-        // GET: /<controller>/
-        public IActionResult Index()
+        private readonly MetricServerContext context;
+
+        public BadgeController(MetricServerContext context)
         {
-            return Redirect("https://img.shields.io/badge/tests-1-green.svg");
+            this.context = context;
+        }
+
+        [Route("~/badges/{metricName}")]
+        public IActionResult Index(string metricName)
+        {
+            var badge = (from metric in context.Metric
+                        join measurement in context.Measurement on metric.Id equals measurement.MetricId
+                        where metric.Name == metricName
+                        orderby measurement.Id descending
+                        select new { Name = metric.Name, Value = measurement.Value, Color = measurement.Color }).First();
+            
+            return Redirect($"https://img.shields.io/badge/{badge.Name}-{badge.Value}-{badge.Color}.svg");
         }
     }
 }
