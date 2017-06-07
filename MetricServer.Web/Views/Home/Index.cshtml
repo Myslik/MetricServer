@@ -2,30 +2,32 @@
     ViewData["Title"] = "Home Page";
 }
 
-<h1>XUnit XML Report</h1>
+<section class="container">
+    <h2>XUnit XML Report</h2>
 
-<form method="post" enctype="multipart/form-data" asp-controller="Publish" asp-action="Index">
-    <div class="form-group">
-        <div class="col-md-10">
-            <p>Project:</p>
-            <input type="text" name="project" />
+    <form method="post" enctype="multipart/form-data" asp-controller="Publish" asp-action="Index">
+        <div class="form-group">
+            <div class="col-md-10">
+                <p>Project:</p>
+                <input type="text" name="project" />
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-10">
-            <p>Branch:</p>
-            <input type="text" name="branch" />
+        <div class="form-group">
+            <div class="col-md-10">
+                <p>Branch:</p>
+                <input type="text" name="branch" />
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-10">
-            <p>Upload one file using this form:</p>
-            <input type="file" name="file" />
+        <div class="form-group">
+            <div class="col-md-10">
+                <p>Upload one file using this form:</p>
+                <input type="file" name="file" />
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-10">
-            <input type="submit" value="Upload" />
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Upload" />
+            </div>
         </div>
-    </div>
-</form>
+    </form>
+</section>
