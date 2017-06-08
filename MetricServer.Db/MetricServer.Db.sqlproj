@@ -133,6 +133,6 @@
     </Build>
   </ItemGroup>
   <ItemGroup>
-    <None Include="MetricServer.Local.publish.xml" />
+    <None Include="MetricServer.LocalDb.publish.xml" />
   </ItemGroup>
 </Project>
