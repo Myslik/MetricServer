@@ -131,8 +131,10 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
+    <Build Include="dbo\Tables\Repository.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MetricServer.LocalDb.publish.xml" />
+    <None Include="MetricServer.Azure.publish.xml" />
   </ItemGroup>
 </Project>

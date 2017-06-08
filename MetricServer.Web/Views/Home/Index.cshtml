@@ -1,11 +1,16 @@
-﻿@{
+﻿@model IEnumerable<MetricServer.Web.ViewModels.RepositoryViewModel>
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <section class="container">
-    <h2>Badges</h2>
-    
-    <img alt="badge" src="/badges/tests" />
+    @foreach(var repository in Model)
+    {
+        <h2>@repository.Name</h2>
 
-    
+        foreach (var badge in repository.Badges)
+        {
+            <img alt="badge" src="@badge.Url" />
+        }
+    }
 </section>
