@@ -54,11 +54,9 @@ namespace MetricServer
                     }
                     else
                     {
-                        Console.WriteLine("Metrics published.");
+                        Console.WriteLine("Metrics published tp server.");
                     }
                 }
-
-                Console.ReadKey();
             }
         }
     }
