@@ -19,5 +19,31 @@ namespace MetricServer
 
             return new Metric { Name = "tests", Value = value.ToString(), Color = value > 0 ? "green" : "red" };
         }
+
+        public static Metric ParseMaintainability(string vsmetricReportPath)
+        {
+            var document = XDocument.Load(vsmetricReportPath);
+            var metricValue = (from m in document.Descendants("Metric")
+                               where m.Attribute("Name").Value == "MaintainabilityIndex"
+                               select m.Attribute("Value").Value).First();
+
+            int metric = int.Parse(metricValue);
+
+            string color;
+            if (metric >= 80)
+            {
+                color = "green";
+            }
+            else if (metric >= 40)
+            {
+                color = "orange";
+            }
+            else
+            {
+                color = "red";
+            }
+
+            return new Metric { Name = "maintainability", Value = metric.ToString(), Color = color };
+        }
     }
 }

@@ -13,12 +13,17 @@ namespace MetricServer
             string repositoryName = string.Empty;
             bool xunitReport = false;
             string xunitReportPath = string.Empty;
+            bool vsmetricReport = false;
+            string vsmetricReportPath = string.Empty;
+            bool consoleOnly = false;
 
             var p = new OptionSet()
             {
                 { "t|token=", "Authentication token for Metric Server.", v => token = v },
                 { "repository=", "Repository name.", v => repositoryName = v },
-                { "xunit=", "Report from XUnit.", v => { xunitReportPath = v; xunitReport = true; } }
+                { "xunit=", "Report from XUnit.", v => { xunitReportPath = v; xunitReport = true; } },
+                { "vsmetrics=", "Report from VS Metrics.", v => { vsmetricReportPath = v; vsmetricReport = true; } },
+                { "c|console", "Write metrics only to console.", v => consoleOnly = v != null }
             };
             var extra = p.Parse(args);
 
@@ -33,6 +38,20 @@ namespace MetricServer
             if (xunitReport)
             {
                 metrics.Add(MetricParser.ParseTests(xunitReportPath));
+            }
+
+            if (vsmetricReport)
+            {
+                metrics.Add(MetricParser.ParseMaintainability(vsmetricReportPath));
+            }
+
+            if (consoleOnly)
+            {
+                foreach(var metric in metrics)
+                {
+                    Console.WriteLine(metric.ToString());
+                }
+                return;
             }
 
             using (var client = new HttpClient())
