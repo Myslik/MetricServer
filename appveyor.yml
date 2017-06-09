@@ -24,7 +24,7 @@ build:
   project: MetricServer.sln
 
 after_build:
-  - nuget pack .\src\MetricServer.CLI\MetricServer.CLI.csproj
+  - nuget pack .\src\MetricServer.CLI\MetricServer.CLI.csproj -Tool -IncludeReferencedProjects
 
 artifacts:
   - path: '*.nupkg'
