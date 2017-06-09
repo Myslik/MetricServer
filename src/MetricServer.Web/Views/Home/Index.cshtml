@@ -4,13 +4,42 @@
 }
 
 <section class="container">
-    @foreach(var repository in Model)
-    {
-        <h2>@repository.Name</h2>
+    <h2>Getting Started</h2>
+    <p>It is super easy to get started. First, download command line utility from <a href="https://www.nuget.org/packages/MetricServer">NuGet</a>.</p>
+    <pre class="code prettyprint prettyprinted"><code class="code-content"><span class="pln">PM&gt; Install-Package MetricServer</span></code></pre>
 
-        foreach (var badge in repository.Badges)
-        {
-            <img alt="badge" src="@badge.Url" />
-        }
-    }
+    <h2>Usage</h2>
+    <p>Run command line utility and provide paths to XUnit and VS Metrics report.</p>
+    <pre class="code prettyprint prettyprinted"><code class="code-content"><span class="pln">MetricServer.CLI.exe -repository=hello-world -token=TOKEN -xunit=XUnit-Report.xml -vsmetrics=VsMetrics.xml</span></code></pre>
+
+    <h2>Who is using it</h2>
+    <p>Look at some of the projects that are using it and what metrics they are gathering.</p>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 150px;">Repository</th>
+                <th>Badges</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var repository in Model)
+            {
+                <tr>
+                    <td>@repository.Name</td>
+                    <td>
+                        @foreach (var badge in repository.Badges)
+                        {
+                            <img alt="badge" src="@badge.Url" />
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h2>Coming next...</h2>
+    <ul>
+        <li>Historic charts to check on trends.</li>
+    </ul>
+
 </section>
