@@ -15,6 +15,8 @@ namespace MetricServer
             string xunitReportPath = string.Empty;
             bool vsmetricReport = false;
             string vsmetricReportPath = string.Empty;
+            bool msbuildLog = false;
+            string msbuildLogPath = string.Empty;
             bool consoleOnly = false;
 
             var p = new OptionSet()
@@ -23,6 +25,7 @@ namespace MetricServer
                 { "repository=", "Repository name.", v => repositoryName = v },
                 { "xunit=", "Report from XUnit.", v => { xunitReportPath = v; xunitReport = true; } },
                 { "vsmetrics=", "Report from VS Metrics.", v => { vsmetricReportPath = v; vsmetricReport = true; } },
+                { "msbuildlog=", "Log file from MSBuild.", v => { msbuildLogPath = v; msbuildLog = true; } },
                 { "c|console", "Write metrics only to console.", v => consoleOnly = v != null }
             };
             var extra = p.Parse(args);
@@ -43,6 +46,11 @@ namespace MetricServer
             if (vsmetricReport)
             {
                 metrics.Add(MetricParser.ParseMaintainability(vsmetricReportPath));
+            }
+
+            if (msbuildLog)
+            {
+                metrics.Add(MetricParser.ParseWarnings(msbuildLogPath));
             }
 
             if (consoleOnly)

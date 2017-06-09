@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
 namespace MetricServer
@@ -44,6 +46,19 @@ namespace MetricServer
             }
 
             return new Metric { Name = "maintainability", Value = metric.ToString(), Color = color };
+        }
+
+        public static Metric ParseWarnings(string msbuildlogPath)
+        {
+            var pattern = new Regex("(\\d+) Warning\\(s\\)");
+            var log = File.ReadAllText(msbuildlogPath);
+            var match = pattern.Match(log);
+            int warnings = 0;
+            if (match.Success)
+            {
+                warnings = int.Parse(match.Groups[1].Value);
+            }
+            return new Metric { Name = "warnings", Value = warnings.ToString(), Color = warnings > 0 ? "orange" : "green" };
         }
     }
 }
