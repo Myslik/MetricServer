@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://github.com/Myslik/MetricServer</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Initial release</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>metric parser</tags>
+  </metadata>
+  <files>
+    <file src="bin\Release\MetricServer.exe" target="tools\MetricServer.exe" />
+    <file src="bin\Release\NDesk.Options.dll" target="tools\NDesk.Options.dll" />
+  </files>
+</package>
