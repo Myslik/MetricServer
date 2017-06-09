@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{522D06B3-EE0A-49CA-9B10-56D8AC069ECC}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricServer.CLI", "src\MetricServer.CLI\MetricServer.CLI.csproj", "{8EBD9A6F-F903-41A3-9C44-4D7982135D8D}"
