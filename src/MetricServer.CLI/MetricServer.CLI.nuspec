@@ -13,4 +13,8 @@
     <copyright>Copyright 2017</copyright>
     <tags>metric parser</tags>
   </metadata>
+  <files>
+    <file src="bin\Release\MetricServer.exe" target="tools\MetricServer.exe" />
+    <file src="bin\Release\NDesk.Options.dll" target="tools\NDesk.Options.dll" />
+  </files>
 </package>
