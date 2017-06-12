@@ -13,6 +13,8 @@ namespace MetricServer
             string repositoryName = string.Empty;
             bool xunitReport = false;
             string xunitReportPath = string.Empty;
+            bool nunitReport = false;
+            string nunitReportPath = string.Empty;
             bool vsmetricReport = false;
             string vsmetricReportPath = string.Empty;
             bool msbuildLog = false;
@@ -24,6 +26,7 @@ namespace MetricServer
                 { "t|token=", "Authentication token for Metric Server.", v => token = v },
                 { "repository=", "Repository name.", v => repositoryName = v },
                 { "xunit=", "Report from XUnit.", v => { xunitReportPath = v; xunitReport = true; } },
+                { "nunit=", "Report from NUnit.", v => { nunitReportPath = v; nunitReport = true; } },
                 { "vsmetrics=", "Report from VS Metrics.", v => { vsmetricReportPath = v; vsmetricReport = true; } },
                 { "msbuildlog=", "Log file from MSBuild.", v => { msbuildLogPath = v; msbuildLog = true; } },
                 { "c|console", "Write metrics only to console.", v => consoleOnly = v != null }
@@ -40,7 +43,11 @@ namespace MetricServer
 
             if (xunitReport)
             {
-                metrics.Add(MetricParser.ParseTests(xunitReportPath));
+                metrics.Add(MetricParser.ParseTestsXUnit(xunitReportPath));
+            }
+            else if (nunitReport)
+            {
+                metrics.Add(MetricParser.ParseTestsNUnit(nunitReportPath));
             }
 
             if (vsmetricReport)
@@ -55,7 +62,7 @@ namespace MetricServer
 
             if (consoleOnly)
             {
-                foreach(var metric in metrics)
+                foreach (var metric in metrics)
                 {
                     Console.WriteLine(metric.ToString());
                 }

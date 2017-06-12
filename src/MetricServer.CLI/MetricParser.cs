@@ -7,7 +7,7 @@ namespace MetricServer
 {
     public static class MetricParser
     {
-        public static Metric ParseTests(string xunitReportPath)
+        public static Metric ParseTestsXUnit(string xunitReportPath)
         {
             var document = XDocument.Load(xunitReportPath);
             var collections = from collection in document.Descendants("collection")
@@ -18,6 +18,17 @@ namespace MetricServer
             {
                 value += int.Parse(total);
             }
+
+            return new Metric { Name = "tests", Value = value.ToString(), Color = value > 0 ? "green" : "red" };
+        }
+
+        public static Metric ParseTestsNUnit(string nunitReportPath)
+        {
+            var document = XDocument.Load(nunitReportPath);
+            var total = (from testrun in document.Descendants("test-run")
+                              select testrun.Attribute("total").Value).Single();
+
+            int value = int.Parse(total);
 
             return new Metric { Name = "tests", Value = value.ToString(), Color = value > 0 ? "green" : "red" };
         }
